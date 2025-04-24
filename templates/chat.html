@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js" type="module"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            /* background-color: #fafafa;     */
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/049/191/678/small/a-colorful-setup-features-two-stylized-chat-windows-inviting-engaging-conversations-and-customer-support-discussions-photo.jpg') no-repeat center center fixed;
+            background-size: contain;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .chat-header {
+            padding: 10px;
+            background: #0095f6;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        #chat {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        #chat p {
+            margin: 8px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 20px;
+            max-width: 80%;
+        }
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #0095f6;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        emoji-picker {
+            position: absolute;
+            bottom: 60px;
+            right: 10px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Room: {{ room }}</div>
+        <div id="chat">
+            {% for msg in history %}
+                <p>{{ msg }}</p>
+            {% endfor %}
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="message" placeholder="Message...">
+            <button id="emojiBtn">😃</button>
+            <button id="sendBtn">Send</button>
+        </div>
+        <emoji-picker style="display:none;"></emoji-picker>
+    </div>
+
+    <script type="module">
+        const socket = io();
+        const username = "{{ username }}";
+        const room = "{{ room }}";
+        const emojiPicker = document.querySelector('emoji-picker');
+        const messageInput = document.getElementById('message');
+        const chat = document.getElementById('chat');
+
+        socket.emit('join', {username, room});
+
+        socket.on('message', function(msg) {
+            chat.innerHTML += `<p>${msg}</p>`;
+            chat.scrollTop = chat.scrollHeight;
+        });
+
+        function sendMessage() {
+            let msg = messageInput.value;
+            if (msg.trim() !== '') {
+                socket.emit('message', {msg});
+                messageInput.value = '';
+            }
+        }
+
+        function toggleEmojiPicker() {
+            emojiPicker.style.display = emojiPicker.style.display === 'none' ? 'block' : 'none';
+        }
+
+        emojiPicker.addEventListener('emoji-click', e => {
+            messageInput.value += e.detail.unicode;
+            messageInput.focus();
+        });
+
+        document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        document.getElementById('emojiBtn').addEventListener('click', toggleEmojiPicker);
+    </script>
+</body>
+</html>

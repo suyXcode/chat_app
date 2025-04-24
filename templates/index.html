@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* background-color: #fafafa;               */
+            background: url('https://cdn.le-vpn.com/wp-content/uploads/2020/03/Online-chat-rooms-1200x628-1.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #f60000;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            width: 80%;
+            padding: 12px;
+            background-color: #f60000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #d15e00;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Join Chat Room</h2>
+        <form method="POST">
+            <input name="username" placeholder="Enter username" required>
+            <input name="room" placeholder="Enter room name" required>
+            <button type="submit">Join</button>
+        </form>
+    </div>
+</body>
+</html>
