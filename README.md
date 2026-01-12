@@ -49,7 +49,7 @@ git clone https://github.com/suyXcode/chat_app.git
 cd chat_app
 ```
 
-###2️⃣ Create virtual environment (recommended)
+### 2️⃣ Create virtual environment (recommended)
 
 ```
 python -m venv venv
@@ -58,13 +58,13 @@ venv\Scripts\activate         # Windows
 ```
 
 
-###3️⃣ Install dependencies
+### 3️⃣ Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-###▶️ Run the Application
+### ▶️ Run the Application
 
 ```
 python app.py
@@ -78,7 +78,7 @@ http://127.0.0.1:5000
 - Enter your username and room name to start chatting.
 - 
 
-###📦 Dependencies
+### 📦 Dependencies
 
 ```
 Your requirements.txt should include:
@@ -89,7 +89,7 @@ python-engineio
 python-socketio
 ```
 
-###📌 Notes
+### 📌 Notes
 
 - This project uses chat_data.json to store messages (not suitable for production).
 - For production, consider:
@@ -101,7 +101,7 @@ Adding authentication (Flask-Login)
 Using proper WebSockets (Socket.IO)
 ```
 
-###🤝 Contributing
+### 🤝 Contributing
 
 Contributions are welcome!
 - Fork the repository
@@ -111,7 +111,7 @@ Contributions are welcome!
 
 
 
-###👨‍💻 Author
+### 👨‍💻 Author
 
 **Suyash Singh**
 
